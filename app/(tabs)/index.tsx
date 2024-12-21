@@ -3,10 +3,14 @@ import { Image, StyleSheet, View, Button } from "react-native";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
-import { displayNotification } from "@/notifications/displayNotification";
-import { chanId } from "@/notifications/NotificationProvider";
+import useTimerStore from "@/notifications/useTimer";
 
 export default function HomeScreen() {
+  const timerState = useTimerStore.use.timerState();
+  const startTimer = useTimerStore.use.startTimer();
+  const pauseTimer = useTimerStore.use.pauseTimer();
+  const resetTimer = useTimerStore.use.resetTimer();
+
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
@@ -21,10 +25,8 @@ export default function HomeScreen() {
         <ThemedText type="title">Notifee Test</ThemedText>
       </ThemedView>
       <View>
-        <Button
-          title="Show notification"
-          onPress={() => displayNotification({ channelId: chanId })}
-        />
+        <Button title="Show notification" onPress={startTimer} />
+        <Button title="Show notification" onPress={pauseTimer} />
       </View>
     </ParallaxScrollView>
   );
