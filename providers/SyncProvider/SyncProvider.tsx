@@ -1,4 +1,5 @@
 import { ReactNode, useEffect } from "react";
+import useDev from "@/devTools/useDev";
 import useItems from "@/stores/itemStore";
 import useUserInfo from "@/stores/userStore";
 import useWs from "@/stores/websocketStore";
@@ -23,7 +24,7 @@ export default function SyncProvider({ children }: { children: ReactNode }) {
 
   const { updateUser } = useUserInfo();
 
-  const isOnline = false;
+  const { isOnline } = useDev();
   const { ws, setWs } = useWs();
   const { getToken, isSignedIn } = useAuth();
 

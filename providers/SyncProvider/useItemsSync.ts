@@ -1,3 +1,4 @@
+import useDev from "@/devTools/useDev";
 import { wsStore } from "@/stores/websocketStore";
 import { ItemResponse } from "@/types/itemTypes";
 import { DeleteItemData } from "@/api/endpoints/itemAPITypes";
@@ -5,7 +6,7 @@ import { DeleteItemData } from "@/api/endpoints/itemAPITypes";
 import { getDeleteOp, getInsertOp, getUpdateOp } from "./opFormatters";
 
 export default function useItemsSync() {
-  const isOnline = false;
+  const { isOnline } = useDev();
 
   const addItem = (item: ItemResponse) => {
     const ws = wsStore.getState().ws;

@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import useDev from "@/devTools/useDev";
 import useItems from "@/stores/itemStore";
 import useUserInfo from "@/stores/userStore";
 import useWs from "@/stores/websocketStore";
@@ -14,7 +15,7 @@ import {
 } from "./helpers";
 
 export default function useGlobalSync() {
-  const isOnline = false;
+  const { isOnline } = useDev();
   const { ws } = useWs();
   const { getToken, signOut } = useAuth();
 
