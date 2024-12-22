@@ -1,8 +1,5 @@
-import { Image, StyleSheet, View, Button } from "react-native";
+import { StyleSheet, View, Button, Text } from "react-native";
 
-import ParallaxScrollView from "@/components/ParallaxScrollView";
-import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
 import useTimerStore from "@/notifications/useTimer";
 
 export default function HomeScreen() {
@@ -12,23 +9,15 @@ export default function HomeScreen() {
   const resetTimer = useTimerStore.use.resetTimer();
 
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
-      headerImage={
-        <Image
-          source={require("@/assets/images/partial-react-logo.png")}
-          style={styles.reactLogo}
-        />
-      }
-    >
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Notifee Test</ThemedText>
-      </ThemedView>
-      <View>
+    <View>
+      <View style={styles.titleContainer}>
+        <Text>Notifee Test</Text>
+      </View>
+      <View style={{ paddingTop: 100 }}>
         <Button title="Show notification" onPress={startTimer} />
         <Button title="Show notification" onPress={pauseTimer} />
       </View>
-    </ParallaxScrollView>
+    </View>
   );
 }
 

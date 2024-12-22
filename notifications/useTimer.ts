@@ -3,8 +3,8 @@ import dayjs from "dayjs";
 import { create } from "zustand";
 import { subscribeWithSelector } from "zustand/middleware";
 
-import { createSelectors } from "./zustandUtils";
 import { TimerState } from "./types";
+import { createSelectors } from "@/utils/zustandUtils";
 
 type TimerStoreState = {
   time: number;

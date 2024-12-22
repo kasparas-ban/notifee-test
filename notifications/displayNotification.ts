@@ -1,7 +1,7 @@
 import notifee, { AndroidForegroundServiceType } from "@notifee/react-native";
 import Colors from "./Colors";
-import { formatFullTime } from "./utils";
 import { TimerState } from "./types";
+import { formatFullTime } from "@/utils/utils";
 
 type DisplayNotificationProps = {
   channelId: string;

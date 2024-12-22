@@ -18,8 +18,10 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
+  const [loaded, error] = useFonts({
+    Gabarito: require("../assets/fonts/Gabarito-VariableFont_wght.ttf"),
+    GabaritoSemibold: require("../assets/fonts/Gabarito-SemiBold.ttf"),
+    GabaritoBold: require("../assets/fonts/Gabarito-Bold.ttf"),
   });
 
   useEffect(() => {

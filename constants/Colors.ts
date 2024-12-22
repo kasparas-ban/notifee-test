@@ -1,26 +1,107 @@
-/**
- * Below are the colors that are used in the app. The colors are defined in the light and dark mode.
- * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
- */
+const tintColorLight = "#2f95dc"
+const tintColorDark = "#fff"
 
-const tintColorLight = '#0a7ea4';
-const tintColorDark = '#fff';
-
-export const Colors = {
+export default {
   light: {
-    text: '#11181C',
-    background: '#fff',
+    text: "#000",
+    background: "#fff",
     tint: tintColorLight,
-    icon: '#687076',
-    tabIconDefault: '#687076',
+    tabIconDefault: "#ccc",
     tabIconSelected: tintColorLight,
   },
   dark: {
-    text: '#ECEDEE',
-    background: '#151718',
+    text: "#fff",
+    background: "#101827",
     tint: tintColorDark,
-    icon: '#9BA1A6',
-    tabIconDefault: '#9BA1A6',
+    tabIconDefault: "#ccc",
     tabIconSelected: tintColorDark,
   },
-};
+  default: {
+    light: "#f2f2f2",
+  },
+  notifications: {
+    rose: {
+      300: "#fda4af",
+      500: "#f43f5e",
+    },
+    sky: {
+      300: "#7dd3fc",
+      500: "#0ea5e9",
+    },
+    gray: {
+      50: "#f9fafb",
+      950: "#030712",
+    },
+  },
+  slate: {
+    100: "rgb(241 245 249)",
+    200: "rgb(226 232 240)",
+    300: "rgb(203 213 225)",
+    400: "rgb(148 163 184)",
+    500: "rgb(100 116 139)",
+    600: "rgb(71 85 105)",
+    700: "rgb(51 65 85)",
+    800: "rgb(30 41 59)",
+    900: "rgb(15 23 42)",
+    950: "rgb(2 6 23)",
+  },
+  gray: {
+    50: "rgb(249 250 251)",
+    100: "rgb(243 244 246)",
+    200: "rgb(229 231 235)",
+    300: "rgb(209 213 219)",
+    400: "rgb(156 163 175)",
+    500: "rgb(107 114 128)",
+    600: "rgb(75 85 99)",
+    700: "rgb(55 65 81)",
+    800: "rgb(31 41 55)",
+    900: "rgb(17 24 39)",
+  },
+  rose: {
+    50: "rgb(255 241 242)",
+    100: "rgb(255 228 230)",
+    200: "rgb(254 205 211)",
+    300: "rgb(253 164 175)",
+    400: "rgb(251 113 133)",
+    500: "rgb(244 63 94)",
+    600: "rgb(225 29 72)",
+    700: "rgb(190 18 60)",
+  },
+  red: {
+    50: "rgb(254 242 242)",
+    100: "rgb(254 226 226)",
+    200: "rgb(254 202 202)",
+    300: "rgb(252 165 165)",
+    400: "rgb(248 113 113)",
+    500: "rgb(239 68 68)",
+    600: "rgb(220 38 38)",
+    700: "rgb(185 28 28)",
+  },
+  sky: {
+    300: "rgb(125 211 252)",
+    400: "rgb(56 189 248)",
+    500: "rgb(14 165 233)",
+  },
+  amber: {
+    50: "rgb(255 251 235)",
+    100: "rgb(254 243 199)",
+    200: "rgb(253 230 138)",
+    300: "rgb(252 211 77)",
+    400: "rgb(251 191 36)",
+    500: "rgb(245 158 11)",
+    600: "rgb(217 119 6)",
+    700: "rgb(180 83 9)",
+    800: "rgb(146 64 14)",
+    900: "rgb(120 53 15)",
+  },
+  green: {
+    50: "rgb(240 253 244)",
+    100: "rgb(220 252 231)",
+    200: "rgb(187 247 208)",
+    400: "rgb(74 222 128)",
+    300: "rgb(134 239 172)",
+    500: "rgb(34 197 94)",
+    600: "rgb(22 163 74)",
+    700: "rgb(20 83 45)",
+  },
+}
