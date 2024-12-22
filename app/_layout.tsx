@@ -13,7 +13,6 @@ import "react-native-reanimated";
 import { NotifierWrapper } from "react-native-notifier";
 
 import { useColorScheme } from "@/hooks/useColorScheme";
-import NotificationProvider from "@/notifications/NotificationProvider";
 import appStateStore from "@/stores/appStore";
 import { ClerkProvider } from "@/providers/ClerkProvider";
 import QueryProvider from "@/providers/QueryProvider";
@@ -24,6 +23,7 @@ import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { StorageProvider } from "@/providers/StorageProvider";
 import Colors from "@/constants/Colors";
 import GlobalLoadingScreen from "@/components/GlobalLoadingScreen/GlobalLoadingScreen";
+import NotificationProvider from "@/notifications/NotificationProvider";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -150,7 +150,7 @@ function RootLayoutNav() {
                               title: "",
                             }}
                           />
-                          <Stack.Screen
+                          {/* <Stack.Screen
                             name="(modals)/(items)/edit-item"
                             options={{
                               presentation: "transparentModal",
@@ -159,7 +159,7 @@ function RootLayoutNav() {
                               title: "",
                               headerBackVisible: false,
                             }}
-                          />
+                          /> */}
                         </Stack>
                       </GlobalLoadingScreen>
                     </NotifierWrapper>

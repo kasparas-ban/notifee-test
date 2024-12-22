@@ -1,37 +1,63 @@
-import { Tabs } from "expo-router";
 import React from "react";
-import { Platform } from "react-native";
-
-import { HapticTab } from "@/components/HapticTab";
-import { useColorScheme } from "@/hooks/useColorScheme";
+import { BlurView } from "expo-blur";
+import { ImageBackground } from "expo-image";
+import { Tabs } from "expo-router";
+import GoalsHeader from "@/components/navbar/GoalsHeader/GoalsHeader";
+import {
+  BottomTabBarItems,
+  BottomTabBarWrapper,
+  Header,
+} from "@/components/navbar/navbar";
 
 export default function TabLayout() {
   return (
-    <Tabs
-      screenOptions={{
-        headerShown: false,
-        tabBarButton: HapticTab,
-        tabBarStyle: Platform.select({
-          ios: {
-            // Use a transparent background on iOS to show the blur effect
-            position: "absolute",
-          },
-          default: {},
-        }),
-      }}
+    <ImageBackground
+      source={require("@/assets/images/background_gradient.png")}
+      style={{ flex: 1 }}
     >
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: "Home",
+      <Tabs
+        screenOptions={{
+          tabBarBackground: () => <BlurView />,
+          headerTransparent: true,
+          header: (props) => <Header {...props} />,
         }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: "Explore",
-        }}
-      />
-    </Tabs>
+        tabBar={(props) => (
+          <BottomTabBarWrapper>
+            <BottomTabBarItems tabBarProps={props} />
+          </BottomTabBarWrapper>
+        )}
+        // sceneContainerStyle={{
+        //     backgroundColor: "transparent",
+        //     width: "100%",
+        //     ...(Platform.OS === "web"
+        //       ? {
+        //           maxWidth: Platform.OS === "web" ? 850 : "auto",
+        //           marginHorizontal: "auto",
+        //         }
+        //       : {}),
+        // }}
+      >
+        <Tabs.Screen
+          name="goals"
+          options={{
+            title: "Goals",
+            header: () => <GoalsHeader />,
+          }}
+        />
+        <Tabs.Screen name="stats" options={{ title: "Stats" }} />
+        <Tabs.Screen
+          name="timer"
+          options={{ title: "Timer" }}
+          initialParams={{ isHighlighted: true }}
+        />
+        <Tabs.Screen name="world" options={{ title: "World" }} />
+        <Tabs.Screen
+          name="account"
+          options={{ title: "Account" }}
+          initialParams={{ isPrivate: true }}
+        />
+        <Tabs.Screen name="index" options={{ href: null }} />
+      </Tabs>
+    </ImageBackground>
   );
 }
