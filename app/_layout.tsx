@@ -1,18 +1,11 @@
-import {
-  DarkTheme,
-  DefaultTheme,
-  ThemeProvider,
-} from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect } from "react";
-import * as SystemUI from "expo-system-ui";
 import "react-native-reanimated";
 import { NotifierWrapper } from "react-native-notifier";
 
-import { useColorScheme } from "@/hooks/useColorScheme";
 import appStateStore from "@/stores/appStore";
 import { ClerkProvider } from "@/providers/ClerkProvider";
 import QueryProvider from "@/providers/QueryProvider";
@@ -21,7 +14,6 @@ import SyncProvider from "@/providers/SyncProvider/SyncProvider";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { StorageProvider } from "@/providers/StorageProvider";
-import Colors from "@/constants/Colors";
 import GlobalLoadingScreen from "@/components/GlobalLoadingScreen/GlobalLoadingScreen";
 import NotificationProvider from "@/notifications/NotificationProvider";
 
@@ -39,7 +31,6 @@ export const unstable_settings = {
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
   const [loaded, error] = useFonts({
     Gabarito: require("../assets/fonts/Gabarito-VariableFont_wght.ttf"),
     GabaritoSemibold: require("../assets/fonts/Gabarito-SemiBold.ttf"),
@@ -55,11 +46,11 @@ export default function RootLayout() {
     if (loaded) SplashScreen.hideAsync();
   }, [loaded]);
 
-  useEffect(() => {
-    SystemUI.setBackgroundColorAsync(
-      colorScheme === "dark" ? Colors.gray[900] : Colors.light.background
-    );
-  }, []);
+  // useEffect(() => {
+  //   SystemUI.setBackgroundColorAsync(
+  //     colorScheme === "dark" ? Colors.gray[900] : Colors.light.background
+  //   );
+  // }, []);
 
   if (!loaded) {
     return null;
@@ -69,7 +60,7 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
-  const colorScheme = useColorScheme();
+  // const colorScheme = useColorScheme();
 
   return (
     <>
@@ -77,80 +68,80 @@ function RootLayoutNav() {
         <QueryProvider>
           <AuthProvider>
             <SyncProvider>
-              <ThemeProvider
+              {/* <ThemeProvider
                 value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
-              >
-                <GestureHandlerRootView style={{ flex: 1 }}>
-                  {/* <DevInfoTagProvider> */}
-                  {/* <ConnectionTagProvider> */}
-                  <BottomSheetModalProvider>
-                    <NotifierWrapper>
-                      <NotificationProvider />
-                      <StorageProvider />
-                      <GlobalLoadingScreen>
-                        <Stack>
-                          <Stack.Screen
-                            name="(start)/index"
-                            options={{ headerShown: false }}
-                            redirect
-                          />
-                          <Stack.Screen
-                            name="(start)/start"
-                            options={{ headerShown: false }}
-                          />
-                          <Stack.Screen
-                            name="(tabs)"
-                            options={{ headerShown: false }}
-                          />
-                          <Stack.Screen
-                            name="(modals)/(publicAuth)"
-                            options={{ headerShown: false }}
-                          />
-                          <Stack.Screen
-                            name="(modals)/(privateAuth)"
-                            options={{ headerShown: false }}
-                          />
-                          <Stack.Screen
-                            name="(modals)/timer-settings"
-                            options={{
-                              presentation: "modal",
-                              headerTransparent: true,
-                              title: "",
-                            }}
-                          />
-                          <Stack.Screen
-                            name="(modals)/(items)/general-item"
-                            options={{
-                              presentation: "modal",
-                              headerTransparent: true,
-                              title: "",
-                            }}
-                          />
-                          <Stack.Screen
-                            name="(modals)/(items)/add-task"
-                            options={{
-                              presentation: "modal",
-                              headerTransparent: true,
-                              title: "",
-                            }}
-                          />
-                          <Stack.Screen
-                            name="(modals)/(items)/add-goal"
-                            options={{
-                              presentation: "modal",
-                              headerTransparent: true,
-                              title: "",
-                            }}
-                          />
-                          <Stack.Screen
-                            name="(modals)/(items)/add-dream"
-                            options={{
-                              presentation: "modal",
-                              headerTransparent: true,
-                              title: "",
-                            }}
-                          />
-                          {/* <Stack.Screen
+              > */}
+              <GestureHandlerRootView style={{ flex: 1 }}>
+                {/* <DevInfoTagProvider> */}
+                {/* <ConnectionTagProvider> */}
+                <BottomSheetModalProvider>
+                  <NotifierWrapper>
+                    <NotificationProvider />
+                    <StorageProvider />
+                    <GlobalLoadingScreen>
+                      <Stack>
+                        <Stack.Screen
+                          name="(start)/index"
+                          options={{ headerShown: false }}
+                          redirect
+                        />
+                        <Stack.Screen
+                          name="(start)/start"
+                          options={{ headerShown: false }}
+                        />
+                        <Stack.Screen
+                          name="(tabs)"
+                          options={{ headerShown: false }}
+                        />
+                        <Stack.Screen
+                          name="(modals)/(publicAuth)"
+                          options={{ headerShown: false }}
+                        />
+                        <Stack.Screen
+                          name="(modals)/(privateAuth)"
+                          options={{ headerShown: false }}
+                        />
+                        <Stack.Screen
+                          name="(modals)/timer-settings"
+                          options={{
+                            presentation: "modal",
+                            headerTransparent: true,
+                            title: "",
+                          }}
+                        />
+                        <Stack.Screen
+                          name="(modals)/(items)/general-item"
+                          options={{
+                            presentation: "modal",
+                            headerTransparent: true,
+                            title: "",
+                          }}
+                        />
+                        <Stack.Screen
+                          name="(modals)/(items)/add-task"
+                          options={{
+                            presentation: "modal",
+                            headerTransparent: true,
+                            title: "",
+                          }}
+                        />
+                        <Stack.Screen
+                          name="(modals)/(items)/add-goal"
+                          options={{
+                            presentation: "modal",
+                            headerTransparent: true,
+                            title: "",
+                          }}
+                        />
+                        <Stack.Screen
+                          name="(modals)/(items)/add-dream"
+                          options={{
+                            presentation: "modal",
+                            headerTransparent: true,
+                            title: "",
+                          }}
+                        />
+                        {/* <Stack.Screen
                             name="(modals)/(items)/edit-item"
                             options={{
                               presentation: "transparentModal",
@@ -160,14 +151,14 @@ function RootLayoutNav() {
                               headerBackVisible: false,
                             }}
                           /> */}
-                        </Stack>
-                      </GlobalLoadingScreen>
-                    </NotifierWrapper>
-                  </BottomSheetModalProvider>
-                  {/* </ConnectionTagProvider> */}
-                  {/* </DevInfoTagProvider> */}
-                </GestureHandlerRootView>
-              </ThemeProvider>
+                      </Stack>
+                    </GlobalLoadingScreen>
+                  </NotifierWrapper>
+                </BottomSheetModalProvider>
+                {/* </ConnectionTagProvider> */}
+                {/* </DevInfoTagProvider> */}
+              </GestureHandlerRootView>
+              {/* </ThemeProvider> */}
             </SyncProvider>
           </AuthProvider>
         </QueryProvider>
