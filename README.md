@@ -1,50 +1,42 @@
-# Welcome to your Expo app 👋
+# TODO
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+- [x] Change password flow
+- [x] Forgot password flow
+- [ ] Change email flow
+- [ ] Add proper inputs for time select to timer settings
+- [ ] Make a loading skeleton account page
+- [ ] Separate Date input components to Android and iOS
+- [ ] Add user description to account page
+- [ ] Improve country select performance
+- [ ] Fix keyboard and submit button layout
+- [ ] Add dark mode to code input
+- [ ] Add App Settings option to account page (to enable dark mode)
+- [ ] Add input validation for City input field
+- [ ] Deleting account - delete local data as well?
+- [ ] Add an option to clear all data without deleting the account
+- [ ] How to handle errors in React Native? What if a page throws an error? Need this for ClerkProvider loading Clerk key
 
-## Get started
+- [ ] Replace screen header for screen with scroll (Edit User screen for example)
 
-1. Install dependencies
+## Low priority
 
-   ```bash
-   npm install
-   ```
+- [ ] Improve error handling
+  - [ ] Highlight incorrect fields in signup process
 
-2. Start the app
+# Build
 
-   ```bash
-    npx expo start
-   ```
+Build APK with `eas build -p android --profile preview --local`
 
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+# Clear cache
 
 ```bash
-npm run reset-project
+rm -rf node_modules
+npm cache clean --force
+npm install
+watchman watch-del-all
+del %localappdata%Temphaste-map-*
+del %localappdata%Tempmetro-cache
+npx expo start --clear
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+apktool d build-1734809939620.apk
