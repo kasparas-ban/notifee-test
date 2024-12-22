@@ -1,7 +1,7 @@
-// import { useStorageHydration } from "@/components/Timer/hooks/useTimerSettings"
+import { useStorageHydration } from "@/components/Timer/hooks/useTimerSettings";
 
 export function StorageProvider() {
-  // useStorageHydration()
+  useStorageHydration();
 
   return null;
 }

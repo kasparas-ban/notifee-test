@@ -1,10 +1,11 @@
+import useDev from "@/devTools/useDev";
 import { wsStore } from "@/stores/websocketStore";
 import { ProfileResp } from "@/types/userTypes";
 
 import { getUserUpdateOp } from "./opFormatters";
 
 export default function useUserSync() {
-  const isOnline = false;
+  const { isOnline } = useDev();
 
   const updateUser = (newData: ProfileResp) => {
     const ws = wsStore.getState().ws;
