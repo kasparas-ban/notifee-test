@@ -8,7 +8,7 @@ In this example I try to use foreground notifications with the foregroundService
 
 ## Instructions to recreate the bug
 
-1. Install all the packages
+1. Make sure you're on the `main` branch. Install all the packages
 
 ```bash
 npm i
@@ -35,15 +35,18 @@ as instructed in https://github.com/invertase/notifee/issues/350#issuecomment-14
 Then go to android/app/src/main/AndroidManifest.xml and add the following
 
 ```xml
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+...
 <!-- Permissions -->
 <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE"/>
 <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-
 ...
-
 <!-- Service -->
 <service android:name="app.notifee.core.ForegroundService" tools:replace="android:foregroundServiceType" android:foregroundServiceType="specialUse" />
+...
+</manifest>
 ```
 
 4. Run the app again
@@ -67,3 +70,11 @@ You can also see the bug with the following steps:
 - Run `apktool d build-[some number].apk` to decompile the .apk file.
 - Find the AndroidManifest.xml file inside the newly created folder.
 - Search for `shortService` inside it. You'll see that the Notifee service is declared with `android:foregroundServiceType="shortService"` instead of `specialUse`.
+
+## Resolution
+
+1. Undo all the changes and start from the clean initial state
+
+2. Delete the word `android` in the `.gitignore` file.
+
+3. Repeat all the steps above to reproduce the bug. You'll find that everything works fine and the `specialUse` does in fact appear in the final APK file.
