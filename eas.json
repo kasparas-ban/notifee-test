@@ -1,0 +1,18 @@
+{
+  "cli": {
+    "version": ">= 14.2.0",
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "preview": {
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk",
+        "image": "ubuntu-18.04-jdk-11-ndk-r19c"
+      }
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}

@@ -1,50 +1,69 @@
-# Welcome to your Expo app 👋
+# Notifee bug
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## Bug description
 
-## Get started
+When using Notifee for Android foreground notifications, `foregroundServiceTypes` parameter sometimes gets overwritten back to it's default value (`shortService`) during the build step.
 
-1. Install dependencies
+In this example I try to use foreground notifications with the foregroundServiceType set to `specialUser`.
 
-   ```bash
-   npm install
-   ```
+## Instructions to recreate the bug
 
-2. Start the app
-
-   ```bash
-    npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+1. Install all the packages
 
 ```bash
-npm run reset-project
+npm i
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+2. Run the app
 
-## Learn more
+```bash
+npx expo run:android
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+You'll get an error saying `Could not resolve app.notifee:core:+.`. Go to the next step.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+3. Go to android/build.gradle and add the following
 
-## Join the community
+```
+maven {
+   url "$rootDir/../node_modules/@notifee/react-native/android/libs"
+}
+```
 
-Join our community of developers creating universal apps.
+as instructed in https://github.com/invertase/notifee/issues/350#issuecomment-1489972107
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Then go to android/app/src/main/AndroidManifest.xml and add the following
+
+```xml
+<!-- Permissions -->
+<uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+<uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE"/>
+<uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+...
+
+<!-- Service -->
+<service android:name="app.notifee.core.ForegroundService" tools:replace="android:foregroundServiceType" android:foregroundServiceType="specialUse" />
+```
+
+4. Run the app again
+
+```bash
+npx expo run:android
+```
+
+This time everything should work fine. Try pressing "Show notification", the notification should appear.
+
+5. Build the app as APK
+
+```bash
+eas build -p android --profile preview --local
+```
+
+6. Install the .apk file directly to the android device and try pressing "Show notification". You'll get an error saying that the required permissions are not in the permissions list.
+
+You can also see the bug with the following steps:
+
+- Run `apktool d build-[some number].apk` to decompile the .apk file.
+- Find the AndroidManifest.xml file inside the newly created folder.
+- Search for `shortService` inside it. You'll see that the Notifee service is declared with `android:foregroundServiceType="shortService"` instead of `specialUse`.
